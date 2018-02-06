@@ -4,9 +4,15 @@ using UnityEngine;
 using controlNameSpace;
 using contolVarsNamespace;
 using functionNameSpace;
+using RosSharp.RosBridgeClient;
+
 
 public class drone : MonoBehaviour
 {
+    //ros connection
+    RosSocket rosSocket;
+    int publication_id;
+
 
     private Rigidbody droneBody;
     
@@ -33,6 +39,10 @@ public class drone : MonoBehaviour
 
     void Start()
     {
+        //ros connection
+        rosSocket = new RosSocket("ws://192.168.1.10:9090");
+        publication_id = rosSocket.Advertize("/drone/pos", "geometry_msgs/Pose");
+
         droneBody = this.GetComponent<Rigidbody>();
         c = new droneController(new controlVars(pidVelX), new controlVars(pidVelY), new controlVars(pidVelZ), new controlVars(pidAngVelY), Time.fixedDeltaTime);
 
@@ -63,11 +73,33 @@ public class drone : MonoBehaviour
 
         c.visualRepresentationSimplified(force, 1, 0.1f, droneBody, minForce, maxForce, new Vector3(-30,0,-30), new Vector3(30,30,30));
 
+        publishToRos();
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             //cam1.enabled = !cam1.enabled;
             //cam2.enabled = !cam2.enabled;
         }
+    }
+
+    private void publishToRos()
+    {
+        publishPositionAndRotation();
+    }
+
+    private void publishPositionAndRotation()
+    {
+        GeometryPose msg = new GeometryPose();
+        msg.position.x = droneBody.transform.position.x;
+        msg.position.y = droneBody.transform.position.y;
+        msg.position.z = droneBody.transform.position.z;
+
+        msg.orientation.x = droneBody.transform.rotation.x;
+        msg.orientation.y = droneBody.transform.rotation.y;
+        msg.orientation.z = droneBody.transform.rotation.z;
+        msg.orientation.w = droneBody.transform.rotation.w;
+
+        rosSocket.Publish(publication_id, msg);
     }
 
     //void OnDrawGizmos()
