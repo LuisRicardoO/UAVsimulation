@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAVsimulation", "Assembly-CSharp-firstpass.csproj", "{9E08D824-F4AA-10A8-B58A-9B246FFCA7C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAVsimulation", "Assembly-CSharp.csproj", "{FC40D27D-A802-85B6-CA76-B75BD37AF818}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAVsimulation", "Assembly-CSharp-Editor-firstpass.csproj", "{4113AE91-E0B0-3781-F9AC-68C4EA98CA20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E08D824-F4AA-10A8-B58A-9B246FFCA7C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E08D824-F4AA-10A8-B58A-9B246FFCA7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E08D824-F4AA-10A8-B58A-9B246FFCA7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E08D824-F4AA-10A8-B58A-9B246FFCA7C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC40D27D-A802-85B6-CA76-B75BD37AF818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC40D27D-A802-85B6-CA76-B75BD37AF818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC40D27D-A802-85B6-CA76-B75BD37AF818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC40D27D-A802-85B6-CA76-B75BD37AF818}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4113AE91-E0B0-3781-F9AC-68C4EA98CA20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4113AE91-E0B0-3781-F9AC-68C4EA98CA20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4113AE91-E0B0-3781-F9AC-68C4EA98CA20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4113AE91-E0B0-3781-F9AC-68C4EA98CA20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
