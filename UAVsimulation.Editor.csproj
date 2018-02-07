@@ -262,6 +262,24 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RosBridgeClient">
+      <HintPath>Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="UrdfImporter">
+      <HintPath>Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -282,24 +300,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading">
-      <HintPath>Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
-    </Reference>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RosBridgeClient">
-      <HintPath>Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
-    </Reference>
-    <Reference Include="UrdfImporter">
-      <HintPath>Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

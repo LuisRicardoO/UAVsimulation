@@ -6,7 +6,7 @@ using contolVarsNamespace;
 using functionNameSpace;
 using RosSharp.RosBridgeClient;
 
-
+//[RequireComponent(typeof(RosConnector))]
 public class drone : MonoBehaviour
 {
     //ros connection
@@ -40,7 +40,9 @@ public class drone : MonoBehaviour
     void Start()
     {
         //ros connection
-        rosSocket = new RosSocket("ws://192.168.1.10:9090");
+        //rosSocket = new RosSocket("ws://192.168.1.10:9090");
+        rosSocket = transform.GetComponent<RosConnector>().RosSocket;
+
         publication_id = rosSocket.Advertize("/drone/pos", "geometry_msgs/Pose");
 
         droneBody = this.GetComponent<Rigidbody>();

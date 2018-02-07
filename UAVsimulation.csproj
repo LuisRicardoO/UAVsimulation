@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -262,6 +264,24 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RosBridgeClient">
+      <HintPath>Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="UrdfImporter">
+      <HintPath>Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -283,24 +303,6 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading">
-      <HintPath>Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
-    </Reference>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RosBridgeClient">
-      <HintPath>Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
-    </Reference>
-    <Reference Include="UrdfImporter">
-      <HintPath>Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UAVsimulation.Plugins.csproj">
@@ -310,6 +312,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\cameraFollow.cs" />
+    <Compile Include="Assets\CameraImagePublisher2.cs" />
     <Compile Include="Assets\controlVars.cs" />
     <Compile Include="Assets\drone.cs" />
     <Compile Include="Assets\droneController.cs" />
@@ -337,6 +340,7 @@
     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\OdometryPatcher.cs" />
     <Compile Include="Assets\RosSharp\Scripts\VelocitySubscriber.cs" />
     <Compile Include="Assets\RosSharp\Scripts\VelocityTransformManager.cs" />
+    <Compile Include="Assets\sensorCamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

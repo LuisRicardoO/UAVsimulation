@@ -37,7 +37,7 @@ namespace RosSharp.RosBridgeClient
 
         void Start()
         {
-            // The ROS part
+            // The ROS part            
             rosSocket = transform.GetComponent<RosConnector>().RosSocket;
             publicationId = rosSocket.Advertize(topic, "sensor_msgs/CompressedImage");
             message = new SensorCompressedImage();

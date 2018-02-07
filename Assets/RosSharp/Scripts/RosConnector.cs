@@ -22,7 +22,7 @@ public class RosConnector : MonoBehaviour
 {
 
     public RosSocket RosSocket { get; private set; }
-    public string RosBridgeServerUrl = "ws://192.168.0.1:9090";
+    public string RosBridgeServerUrl = "ws://192.168.1.10:9090";
 
     public void Awake()
     {
