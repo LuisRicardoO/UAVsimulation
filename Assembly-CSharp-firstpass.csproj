@@ -164,6 +164,24 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="MathNet.Numerics">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="RosBridgeClient">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Threading">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
+ </Reference>
+ <Reference Include="UrdfImporter">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
+ </Reference>
+ <Reference Include="websocket-sharp">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
  </Reference>

@@ -52,11 +52,36 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\cameraFollow.cs" />
+     <Compile Include="Assets\CameraImagePublisher2.cs" />
      <Compile Include="Assets\controlVars.cs" />
      <Compile Include="Assets\drone.cs" />
      <Compile Include="Assets\droneController.cs" />
      <Compile Include="Assets\functions.cs" />
      <Compile Include="Assets\PID.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\AxisInput.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\CameraImageManager.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\CameraImagePublisher.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\JointLimitsManager.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\JointMotorManager.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\JointStateManager.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\JointStateSubscriber.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\JointTransformManager.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\OdometrySubscriber.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\OdometryTransformManager.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\RigidbodyUrdfDataManager.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\RosConnector.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\SpotLightManager.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\TransformExtensions.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\ConvexMeshPatcher.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\GravityPatcher.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\JointMotorPatcher.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\JointStatePatcher.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\KinematicPatcher.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\OdometryPatcher.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\VelocitySubscriber.cs" />
+     <Compile Include="Assets\RosSharp\Scripts\VelocityTransformManager.cs" />
+     <Compile Include="Assets\sensorCamera.cs" />
+     <Compile Include="Assets\sensorIMU.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -119,6 +144,24 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="MathNet.Numerics">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="RosBridgeClient">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Threading">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
+ </Reference>
+ <Reference Include="UrdfImporter">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
+ </Reference>
+ <Reference Include="websocket-sharp">
+ <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

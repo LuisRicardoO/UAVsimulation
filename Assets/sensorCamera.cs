@@ -7,7 +7,7 @@ using RosSharp.RosBridgeClient;
 public class sensorCamera : MonoBehaviour {
 
     private CameraImagePublisher2 toPublish;
-    public string publishTopic="drone/image/compressed";
+    public string publishTopic;
     [Range(0, 100)]
     public int qualityLevel = 50;
 

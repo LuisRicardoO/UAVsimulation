@@ -102,51 +102,5 @@ public class drone : MonoBehaviour
         msg.orientation.w = droneBody.transform.rotation.w;
 
         rosSocket.Publish(publication_id, msg);
-    }
-
-    //void OnDrawGizmos()
-    //{
-    //    Vector3 paraLinVel = Quaternion.AngleAxis(-droneBody.rotation.eulerAngles.y, Vector3.up) * droneBody.velocity;
-
-    //    Vector3 vx = droneBody.transform.TransformDirection(new Vector3(paraLinVel.x, 0, 0));
-            
-    //    Vector3 vy = droneBody.transform.TransformDirection(new Vector3(0, paraLinVel.y, 0));
-    //    Vector3 vz = droneBody.transform.TransformDirection(new Vector3(0, 0, paraLinVel.z));
-
-    //    DrawHelperAtCenter(vx, Color.red, 0.1f);
-    //    DrawHelperAtCenter(vy, Color.green, 0.1f);
-    //    DrawHelperAtCenter(vz, Color.blue, 0.1f);
-    //    //Color color;
-    //    //color = Color.green;
-    //    //// local up
-    //    //DrawHelperAtCenter(this.transform.up, color, 2f);
-
-    //    //color.g -= 0.5f;
-    //    //// global up
-    //    //DrawHelperAtCenter(Vector3.up, color, 1f);
-
-    //    //color = Color.blue;
-    //    //// local forward
-    //    //DrawHelperAtCenter(this.transform.forward, color, 2f);
-
-    //    //color.b -= 0.5f;
-    //    //// global forward
-    //    //DrawHelperAtCenter(Vector3.forward, color, 1f);
-
-    //    //color = Color.red;
-    //    //// local right
-    //    //DrawHelperAtCenter(this.transform.right, color, 2f);
-
-    //    //color.r -= 0.5f;
-    //    //// global right
-    //    //DrawHelperAtCenter(Vector3.right, color, 1f);
-    //}
-
-    //private void DrawHelperAtCenter(
-    //                   Vector3 direction, Color color, float scale)
-    //{
-    //    Gizmos.color = color;
-    //    Vector3 destination = transform.position + direction * scale;
-    //    Gizmos.DrawLine(transform.position, destination);
-    //}
+    }  
 }
