@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   publishTopic: drone/image/compressed
-  qualityLevel: 80
+  qualityLevel: 100
 --- !u!1 &562782577
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9b8f32224ca04498ffd0a2e2bc0567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RosBridgeServerUrl: ws://192.168.0.9:9090
+  RosBridgeServerUrl: ws://192.168.1.10:9090
 --- !u!1 &765100304
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +795,7 @@ GameObject:
   - component: {fileID: 1413491199}
   - component: {fileID: 1413491198}
   - component: {fileID: 1413491197}
+  - component: {fileID: 1413491201}
   m_Layer: 0
   m_Name: imu
   m_TagString: Untagged
@@ -868,6 +869,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1413491195}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1413491201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413491195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b624b699698be46a7266f716c86c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publishTopic: drone/imu
 --- !u!1 &1581624592
 GameObject:
   m_ObjectHideFlags: 0

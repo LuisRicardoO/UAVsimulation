@@ -90,7 +90,7 @@ public class drone : MonoBehaviour
     }
 
     private void publishPositionAndRotation()
-    {
+    {        
         GeometryPose msg = new GeometryPose();
         msg.position.x = droneBody.transform.position.x;
         msg.position.y = droneBody.transform.position.y;
