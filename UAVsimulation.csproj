@@ -315,6 +315,7 @@
     <Compile Include="Assets\drone.cs" />
     <Compile Include="Assets\droneController.cs" />
     <Compile Include="Assets\functions.cs" />
+    <Compile Include="Assets\greyScaleDepthTest.cs" />
     <Compile Include="Assets\PID.cs" />
     <Compile Include="Assets\RosSharp\Scripts\AxisInput.cs" />
     <Compile Include="Assets\RosSharp\Scripts\CameraImageManager.cs" />
@@ -348,6 +349,7 @@
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
+    <None Include="Assets\depthGreyScale.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

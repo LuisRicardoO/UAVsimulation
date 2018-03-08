@@ -47,7 +47,7 @@ public class sensorCamera : MonoBehaviour {
                 
         //get the above rendered image to a texture
         texture2D.ReadPixels(rect, 0, 0);
-        texture2D.Apply();
+        texture2D.Apply();       
 
         //restore the other rendertexture
         RenderTexture.active = rendText;

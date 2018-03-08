@@ -8,6 +8,8 @@ public class sensorIMU : MonoBehaviour
 
     public string publishTopic = "drone/imu";
 
+    public string frame_id;
+
     private Rigidbody droneBody;
 
     private RosSocket rosSocket;
@@ -36,6 +38,9 @@ public class sensorIMU : MonoBehaviour
     private Imu updateImu()
     {
         Imu sensorImu = new Imu();
+
+        //setup frame
+        sensorImu.header.frame_id = frame_id;
 
         //setting covarience unknown
         float[] matrixUnknown = { 1, 0, 0, 0, 1, 0, 0, 0, 1 };
