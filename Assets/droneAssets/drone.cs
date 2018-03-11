@@ -9,31 +9,31 @@ using RosSharp.RosBridgeClient;
 //[RequireComponent(typeof(RosConnector))]
 public class drone : MonoBehaviour
 {
-    //ros connection
-    RosSocket rosSocket;
-    int publication_id;
+	//ros connection
+	RosSocket rosSocket;
+	int publication_id;
 
 
-    private Rigidbody droneBody;
+	private Rigidbody droneBody;
     
-    //public Camera cam1;
-    //public Camera cam2;
+	//public Camera cam1;
+	//public Camera cam2;
 
-    private droneController c;
-    private functions f = new functions();
+	private droneController c;
+	private functions f = new functions ();
 
-    private Vector4 pidVelY = new Vector4(5, 4, 0, 50);
-    private Vector4 pidVelX = new Vector4(5, 2.5f, 0, 10);
-    private Vector4 pidVelZ = new Vector4(5, 2.5f, 0, 10);
-    private Vector4 pidAngVelY = new Vector4(0.01f, 0, 0, 0);
-
-
-    public Vector3 velRef;
-    public float angVelRef;
+	private Vector4 pidVelY = new Vector4 (5, 4, 0, 50);
+	private Vector4 pidVelX = new Vector4 (5, 2.5f, 0, 10);
+	private Vector4 pidVelZ = new Vector4 (5, 2.5f, 0, 10);
+	private Vector4 pidAngVelY = new Vector4 (0.01f, 0, 0, 0);
 
 
-    public float maxit;
-    public float lerpValue;    
+	public Vector3 velRef;
+	public float angVelRef;
+
+
+	public float maxit;
+	public float lerpValue;
 
 
 
@@ -48,7 +48,7 @@ public class drone : MonoBehaviour
         droneBody = this.GetComponent<Rigidbody>();
         c = new droneController(new controlVars(pidVelX), new controlVars(pidVelY), new controlVars(pidVelZ), new controlVars(pidAngVelY), Time.fixedDeltaTime);
 
-        //cam1.enabled = true;
+		//cam1.enabled = false;
         //cam2.enabled = true;
     }
 
@@ -75,7 +75,7 @@ public class drone : MonoBehaviour
 
         c.visualRepresentationSimplified(force, 1, 0.1f, droneBody, minForce, maxForce, new Vector3(-30,0,-30), new Vector3(30,30,30));
 
-        publishToRos();
+        //publishToRos();
 
         if (Input.GetKeyDown(KeyCode.C))
         {

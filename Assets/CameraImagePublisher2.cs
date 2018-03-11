@@ -32,7 +32,7 @@ namespace RosSharp.RosBridgeClient
             // Build up the message and publish
             message.header.frame_id = frameId;
             message.header.seq = sequenceId;
-            message.format = "jpeg";
+            message.format = "png";
             message.data = texture2D.EncodeToJPG(qualityLevel);
             rosSocket.Publish(publicationId, message);
 

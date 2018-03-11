@@ -53,11 +53,17 @@
   <ItemGroup>
      <Compile Include="Assets\cameraFollow.cs" />
      <Compile Include="Assets\CameraImagePublisher2.cs" />
-     <Compile Include="Assets\controlVars.cs" />
-     <Compile Include="Assets\drone.cs" />
-     <Compile Include="Assets\droneController.cs" />
-     <Compile Include="Assets\functions.cs" />
-     <Compile Include="Assets\PID.cs" />
+     <Compile Include="Assets\droneAssets\control\controlVars.cs" />
+     <Compile Include="Assets\droneAssets\control\droneController.cs" />
+     <Compile Include="Assets\droneAssets\control\functions.cs" />
+     <Compile Include="Assets\droneAssets\control\PID.cs" />
+     <Compile Include="Assets\droneAssets\drone.cs" />
+     <Compile Include="Assets\droneAssets\sensors\camera sensor\greyScaleDepthTest.cs" />
+     <Compile Include="Assets\droneAssets\sensors\camera sensor\sensorCamera.cs" />
+     <Compile Include="Assets\droneAssets\sensors\camera sensor\sensorCameraDepth.cs" />
+     <Compile Include="Assets\droneAssets\sensors\gps sensor\gps sensor.cs" />
+     <Compile Include="Assets\droneAssets\sensors\imu sensor\sensorIMU.cs" />
+     <Compile Include="Assets\droneAssets\sensors\laser sensor\laserSensor.cs" />
      <Compile Include="Assets\RosSharp\Scripts\AxisInput.cs" />
      <Compile Include="Assets\RosSharp\Scripts\CameraImageManager.cs" />
      <Compile Include="Assets\RosSharp\Scripts\CameraImagePublisher.cs" />
@@ -80,8 +86,7 @@
      <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\OdometryPatcher.cs" />
      <Compile Include="Assets\RosSharp\Scripts\VelocitySubscriber.cs" />
      <Compile Include="Assets\RosSharp\Scripts\VelocityTransformManager.cs" />
-     <Compile Include="Assets\sensorCamera.cs" />
-     <Compile Include="Assets\sensorIMU.cs" />
+     <None Include="Assets\droneAssets\sensors\camera sensor\depthshader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -142,26 +147,29 @@
  <Reference Include="UnityEditor.Graphs">
  <HintPath>D:/programs/unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.WSA.Extensions">
+ <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.WSA.Extensions.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="MathNet.Numerics">
- <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
+ <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
+ <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="RosBridgeClient">
- <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
+ <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading">
- <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
+ <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
  </Reference>
  <Reference Include="UrdfImporter">
- <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
+ <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
  </Reference>
  <Reference Include="websocket-sharp">
- <HintPath>D:/files/unityworksapce/UAVsimulation/Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
+ <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
