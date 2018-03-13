@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -576,14 +576,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 718549389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6500b40c6d5a88844b39c83ba6b0bd17, type: 3}
+  m_Script: {fileID: 11500000, guid: 2158db54f1e01ea4994a70c3f69f599e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  run: 0
-  publishTopic: drone/imu
-  frame_id: 
-  height: 0
-  width: 0
 --- !u!1 &728241926
 GameObject:
   m_ObjectHideFlags: 0
