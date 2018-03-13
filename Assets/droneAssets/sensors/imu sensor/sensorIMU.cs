@@ -5,6 +5,7 @@ using RosSharp.RosBridgeClient;
 
 public class sensorIMU : MonoBehaviour
 {
+    public bool run;
 
     public string publishTopic = "drone/imu";
 
@@ -30,9 +31,12 @@ public class sensorIMU : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //get Imuvalue
-        sensor = updateImu();
-        rosSocket.Publish(publication_id, sensor);
+        if (run)
+        {
+            //get Imuvalue
+            sensor = updateImu();
+            rosSocket.Publish(publication_id, sensor);
+        }
     }
 
     private Imu updateImu()

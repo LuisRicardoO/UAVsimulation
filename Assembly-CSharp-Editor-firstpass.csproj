@@ -118,6 +118,9 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="pcLib">
+ <HintPath>D:/files/unity workspace/UAVsimulation/Assets/Plugins/pointCloud/pcLib.dll</HintPath>
+ </Reference>
  <Reference Include="MathNet.Numerics">
  <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
  </Reference>
