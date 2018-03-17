@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 public class pointcloudTest : MonoBehaviour
 {
-    
+
 
     [DllImport("pclUnity", CharSet = CharSet.Unicode)]
     static extern IntPtr pclConnectionConstructor();
@@ -74,12 +74,12 @@ public class pointcloudTest : MonoBehaviour
         {
             float* array = (float*)getPoint(shared, 0);
             Debug.Log("r: " + array[0] + " " + array[1] + " " + array[2]);
-        }  
+        }
         Debug.Log("4: get field size");
-        Debug.Log("r: "+getRosFieldSize(shared));
+        Debug.Log("r: " + getRosFieldSize(shared));
         Debug.Log("5: get field size with convertion");
         toRosPointCloud(shared);
-        Debug.Log("r: "+getRosFieldSize(shared));
+        Debug.Log("r: " + getRosFieldSize(shared));
         Debug.Log("5: get all field names");
         Debug.Log("r: ");
         unsafe
@@ -88,8 +88,8 @@ public class pointcloudTest : MonoBehaviour
             //int* names = (int*)getRosFieldName(shared);
             for (int i = 0; i < getRosFieldSize(shared); i++)
             {
-                
-                string name=new string(names[i],0,1);                
+
+                string name = new string(names[i], 0, 1);
                 Debug.Log(name + "|");
             }
         }

@@ -145,5 +145,3 @@ D:\files\unity workspace\UAVsimulation\Temp\bin\Debug\UnityEditor.iOS.Extensions
 D:\files\unity workspace\UAVsimulation\obj\Debug\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache
 D:\files\unity workspace\UAVsimulation\obj\Debug\Assembly-CSharp-firstpass.dll
 D:\files\unity workspace\UAVsimulation\obj\Debug\Assembly-CSharp-firstpass.pdb
-D:\files\unity workspace\UAVsimulation\Temp\bin\Debug\pcLib.dll
-D:\files\unity workspace\UAVsimulation\Temp\bin\Debug\pcLib.pdb

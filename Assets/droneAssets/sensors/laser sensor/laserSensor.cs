@@ -11,22 +11,67 @@ public class laserSensor : MonoBehaviour
 {
     pclInterface pcl = new pclInterface();
 
+    public string publishTopic = "drone/laserScan";
+    public string frame_id = "laserFrame";
+
+    private Rigidbody droneBody;
+
+    private RosSocket rosSocket;
+    private int publication_id;
+
+    public bool run;
+
     void Start()
     {
-        pcl.createPclCloud(0, 0, true);
-        Debug.Log("Cloud->" + pcl.readCloudParameters());
-        pcl.pushPointToCloud(new Vector3(1, 2, 3));
-        pcl.pushPointToCloud(new Vector3(4, 5.875685f, 6));
-        pcl.pushPointToCloud(new Vector3(7, 8, 9));
-        pcl.pushPointToCloud(new Vector3(10, 11, 12));
-        Debug.Log("after adding points cloud->" + pcl.readCloudParameters());
-        SensorPointCloud2 pc = new SensorPointCloud2();        
-        pcl.getRosMsgFromCloud(pc);        
-        Debug.Log("Cloud2->" + pcl.readCloud2Parameters());
+        //unsafe
+        //{
+        //    byte[] ok = { 1, 2 };
+        //    fixed (byte* ptr = &ok[0])
+        //    {
+        //        byte[] apresentar = new byte[2];
+        //        int size = 2;
+        //        for (int i = 0; i < size; i++)
+        //        {
+        //            apresentar[0] = ptr[0];
+        //            apresentar[1] = ptr[1];
+
+        //        }
+
+        //        Debug.LogWarning("aqui os byets |"+apresentar[0]+"|"+ apresentar[1]+"|"+(byte)10);
+        //    }
+        //}
+
+        rosSocket = GameObject.Find("drone").GetComponent<RosConnector>().RosSocket;
+        droneBody = GameObject.Find("drone").GetComponent<Rigidbody>();
+        publication_id = rosSocket.Advertize(publishTopic, "sensor_msgs/PointCloud2");
+
+        //pcl.createPclCloud(0, 0, true);
+        //Debug.Log("Cloud->" + pcl.readCloudParameters());
+        //pcl.pushPointToCloud(new Vector3(1, 2, 3));
+        //pcl.pushPointToCloud(new Vector3(4, 5.875685f, 6));
+        //pcl.pushPointToCloud(new Vector3(7, 8, 9));
+        //pcl.pushPointToCloud(new Vector3(10, 11, 12));
+        //Debug.Log("after adding points cloud->" + pcl.readCloudParameters());
+        //SensorPointCloud2 pc = new SensorPointCloud2();
+        //pcl.convertToRosMsgFromCloud(pc, "sensorLaserFrame");
+        //Debug.Log("Cloud2->" + pcl.readCloud2Parameters());
+        //Debug.Log("CloudR->" + pcl.readCloudRosParameters(pc));
     }
     void Update()
     {
-
+        if (run)
+        {
+            pcl.createPclCloud(0, 0, true);
+            pcl.pushPointToCloud(new Vector3(112, 12, 33));
+            //pcl.pushPointToCloud(new Vector3(4, 5, 6));
+            //pcl.pushPointToCloud(new Vector3(7, 8, 9));
+            SensorPointCloud2 pc = new SensorPointCloud2();
+            pcl.convertToRosMsgFromCloud(pc, frame_id);
+            //Debug.Log("Cloud2->" + pcl.readCloud2Parameters());
+            Debug.Log("CloudR->" + pcl.readCloudRosParameters(pc));
+            pcl.compareDataCloud2andCloudRos(pc);
+            rosSocket.Publish(publication_id, pc);
+        }
     }
 
     //   [DllImport("pcLibUn", EntryPoint = "okokok")]

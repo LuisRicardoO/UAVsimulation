@@ -25,7 +25,7 @@ public class sensorIMU : MonoBehaviour
     {
         rosSocket = GameObject.Find("drone").GetComponent<RosConnector>().RosSocket;
         droneBody = GameObject.Find("drone").GetComponent<Rigidbody>();
-        publication_id = rosSocket.Advertize("drone/imu", "sensor_msgs/Imu");
+        publication_id = rosSocket.Advertize(publishTopic, "sensor_msgs/Imu");
     }
 
     // Update is called once per frame

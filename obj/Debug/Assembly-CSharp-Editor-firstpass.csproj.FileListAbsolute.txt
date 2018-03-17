@@ -73,5 +73,3 @@ D:\files\unity workspace\UAVsimulation\obj\Debug\Assembly-CSharp-Editor-firstpas
 D:\files\unity workspace\UAVsimulation\obj\Debug\Assembly-CSharp-Editor-firstpass.pdb
 D:\files\unity workspace\UAVsimulation\obj\Debug\Assembly-CSharp-Editor-firstpass.csprojResolveAssemblyReference.cache
 D:\files\unity workspace\UAVsimulation\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
-D:\files\unity workspace\UAVsimulation\Temp\bin\Debug\pcLib.dll
-D:\files\unity workspace\UAVsimulation\Temp\bin\Debug\pcLib.pdb
