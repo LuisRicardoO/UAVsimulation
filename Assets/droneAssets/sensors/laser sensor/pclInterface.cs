@@ -33,6 +33,15 @@ namespace pclInterfaceName
         static extern void pushPoint(IntPtr api, float x, float y, float z);
 
         [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern float getPointAtX(IntPtr api, int at);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern float getPointAtY(IntPtr api, int at);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern float getPointAtZ(IntPtr api, int at);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
         static extern int getCloudWidth(IntPtr api);
 
         [DllImport("pclUnity", CharSet = CharSet.Unicode)]
@@ -82,6 +91,15 @@ namespace pclInterfaceName
 
         [DllImport("pclUnity", CharSet = CharSet.Unicode)]
         static extern int getRosDataSize(IntPtr api);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern byte getRosDataAt(IntPtr api, int at);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern byte sendTest(IntPtr api);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern IntPtr sendTestArray(IntPtr api);
         //**************************************************************************************************************
         //**************************************************************************************************************
         //**************************************************************************************************************
@@ -135,6 +153,7 @@ namespace pclInterfaceName
             sout += "width: " + getCloudWidth(cloud).ToString() + " ";
             sout += "height: " + getCloudHeight(cloud).ToString() + " ";
             sout += "is dense: " + getCloudDense(cloud).ToString();
+            sout += "first Point" + getPointAtX(cloud, 0) + " " + getPointAtY(cloud, 0) + " " + getPointAtZ(cloud, 0);
             return sout;
         }
 
@@ -184,8 +203,25 @@ namespace pclInterfaceName
             sout += "names: " + names[0] + " " + names[1] + " " + names[2] + " ";
             sout += "offsets: " + offsets[0] + " " + offsets[1] + " " + offsets[2] + " ";
             sout += "datatypes: " + dataTypes[0] + " " + dataTypes[1] + " " + dataTypes[2] + " ";
-            sout += "counts: " + counts[0] + " " + counts[1] + " " + counts[2] + " ";            
-
+            sout += "counts: " + counts[0] + " " + counts[1] + " " + counts[2] + " ";
+            sout += "data size: " + getRosDataSize(cloud) + " ";
+            sout += "data: ";
+            byte[] data = new byte[0];
+            getDataCloud2ToArray(ref data);
+            int length = getRosDataSize(cloud);
+            for (int i = 0; i < length; i++)
+            {
+                sout += data[i] + " ";
+            }
+            //byte[] data = new byte[0];
+            //getDataCloud2ToArray(ref data);
+            //string converted = System.Text.Encoding.UTF8.GetString(data, 0, getRosDataSize(cloud));
+            //sout += "datareal: " + converted + " ";
+            //Debug.LogWarning("REALDAKSHGAS: " + " " + data[0] + data[1] + data[2] + data[3] + data[4]);
+            //byte[] data2 = new byte[0];
+            //testByteArray(ref data2);
+            ////string converted2 = System.Text.Encoding.UTF8.GetString(data2,0,20);
+            //Debug.LogWarning( "testData: " +" "+data2[0] + data2[1] + data2[2] + data2[3] + data2[4]);
             //unsafe
             //{
             //    byte* ptr = (byte*)getRosData(cloud);
@@ -196,7 +232,7 @@ namespace pclInterfaceName
             //        rosByteArray[i] = ptr[i];
             //    }                
             //    Debug.LogWarning("1data|"+rosByteArray[0]+"|"); 
-            //}
+            //}            
             return sout;
         }
 
@@ -238,17 +274,12 @@ namespace pclInterfaceName
             }
 
             //copy data
-            unsafe
-            {
-                byte* ptr = (byte*)getRosData(cloud);
-                int length = getRosDataSize(cloud);
-                byte[] rosByteArray = new byte[length];
-                for (int i = 0; i < length; i++)
-                {
-                    rosByteArray[i] = ptr[i];
-                }
-                pc.data = rosByteArray;
-            }
+            byte[] data = new byte[0];
+            getDataCloud2ToArray(ref data);
+            int length= getRosDataSize(cloud);
+            Array.Resize<byte>(ref pc.data, length);
+            for (int i = 0; i < length; i++)            
+                pc.data[i] = data[i];              
         }
 
         /// <summary>
@@ -270,11 +301,12 @@ namespace pclInterfaceName
             sout += "offsets: " + pc.fields[0].offset + " " + pc.fields[1].offset + " " + pc.fields[2].offset + " ";
             sout += "datatypes: " + pc.fields[0].datatype + " " + pc.fields[1].datatype + " " + pc.fields[2].datatype + " ";
             sout += "counts: " + pc.fields[0].count + " " + pc.fields[1].count + " " + pc.fields[2].count + " ";
-            sout += "data size: " + getRosDataSize(cloud);
-            
-            //Debug.LogWarning("1RRRR|" + pc.data[0]+"|");
-            
-
+            sout += "data size: " + getRosDataSize(cloud) + " ";            
+            sout += "data: ";
+            int length = getRosDataSize(cloud);
+            for (int i = 0; i < length; i++)            
+                sout += pc.data[i] + " ";            
+                        
             return sout;
         }
 
@@ -335,9 +367,20 @@ namespace pclInterfaceName
                 return list;
             }
         }
-        
-        public void compareDataCloud2andCloudRos(SensorPointCloud2 pc)
+
+        public string compareDataCloud2andCloudRos(SensorPointCloud2 pc)
         {
+            string sout = "";
+            byte[] data = new byte[0];
+            getDataCloud2ToArray(ref data);
+            int length = getRosDataSize(cloud);
+            for (int i = 0; i < length; i++)
+            {
+                sout += "(" + pc.data[i] + "," + data[i] + ") ";
+            }
+            return sout;
+
+            /*
             unsafe
             {
                 byte* ptr = (byte*)getRosData(cloud);
@@ -346,12 +389,50 @@ namespace pclInterfaceName
                 string sout = "";
                 for (int i = 0; i < length; i++)
                 {
-                    rosByteArray[i] = ptr[i];
-                    sout += "(" + rosByteArray[i] + "," + pc.data[i] + ")   ";
+                    //rosByteArray[i] = ptr[i];
+                    sout += "(" + pc.data[i] + "," + pc.data[i] + ")   ";
                 }
                 Debug.Log("compara(cloud2,Ros)" + sout);
             }
+            */
         }
+        public byte readDataFromCloud2At(int at)
+        {
+            return getRosDataAt(cloud, at);
+        }
+
+        public byte testByte()
+        {
+            return sendTest(cloud);
+        }
+
+        private void testByteArray(ref byte[] data)
+        {
+            unsafe
+            {
+                Array.Resize<byte>(ref data, 20);
+                byte* ptr = (byte*)sendTestArray(cloud);
+                for (int i = 0; i < 20; i++)
+                {
+                    data[i] = ptr[i];
+                } 
+            }
+        }
+
+        private void getDataCloud2ToArray(ref byte[] data)
+        {
+            unsafe
+            {
+                int length = getRosDataSize(cloud);
+                Array.Resize<byte>(ref data, length);
+                byte* ptr = (byte*)getRosData(cloud);
+                for (int i = 0; i < length; i++)
+                {
+                    data[i] = ptr[i];
+                }
+            }
+        }
+
 
     }
 }
