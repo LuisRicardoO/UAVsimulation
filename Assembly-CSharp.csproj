@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{FC40D27D-A802-85B6-CA76-B75BD37AF818}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -51,156 +52,157 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\cameraFollow.cs" />
-     <Compile Include="Assets\CameraImagePublisher2.cs" />
-     <Compile Include="Assets\droneAssets\control\controlVars.cs" />
-     <Compile Include="Assets\droneAssets\control\droneController.cs" />
-     <Compile Include="Assets\droneAssets\control\functions.cs" />
-     <Compile Include="Assets\droneAssets\control\PID.cs" />
-     <Compile Include="Assets\droneAssets\drone.cs" />
-     <Compile Include="Assets\droneAssets\sensors\camera sensor\greyScaleDepthTest.cs" />
-     <Compile Include="Assets\droneAssets\sensors\camera sensor\sensorCamera.cs" />
-     <Compile Include="Assets\droneAssets\sensors\camera sensor\sensorCameraDepth.cs" />
-     <Compile Include="Assets\droneAssets\sensors\gps sensor\gps sensor.cs" />
-     <Compile Include="Assets\droneAssets\sensors\imu sensor\sensorIMU.cs" />
-     <Compile Include="Assets\droneAssets\sensors\laser sensor\laserSensor.cs" />
-     <Compile Include="Assets\droneAssets\sensors\laser sensor\pclInterface.cs" />
-     <Compile Include="Assets\droneAssets\sensors\laser sensor\pointcloudTest.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\AxisInput.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\CameraImageManager.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\CameraImagePublisher.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\JointLimitsManager.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\JointMotorManager.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\JointStateManager.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\JointStateSubscriber.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\JointTransformManager.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\OdometrySubscriber.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\OdometryTransformManager.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\RigidbodyUrdfDataManager.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\RosConnector.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\SpotLightManager.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\TransformExtensions.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\ConvexMeshPatcher.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\GravityPatcher.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\JointMotorPatcher.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\JointStatePatcher.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\KinematicPatcher.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\OdometryPatcher.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\VelocitySubscriber.cs" />
-     <Compile Include="Assets\RosSharp\Scripts\VelocityTransformManager.cs" />
-     <None Include="Assets\droneAssets\sensors\camera sensor\depthshader.shader" />
- <Reference Include="UnityEngine.UI">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Networking">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.TestRunner">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.TestRunner">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
- </Reference>
- <Reference Include="nunit.framework">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Timeline">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Timeline">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.TreeEditor">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UIAutomation">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UIAutomation">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UIAutomation/Editor/UnityEditor.UIAutomation.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.GoogleAudioSpatializer">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.GoogleAudioSpatializer">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.HoloLens">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.HoloLens">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.SpatialTracking">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.VR">
- <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Graphs">
- <HintPath>D:/programs/unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.WSA.Extensions">
- <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.WSA.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.WindowsStandalone.Extensions">
- <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="pcLib">
- <HintPath>D:/files/unity workspace/UAVsimulation/Assets/Plugins/pointCloud/pcLib.dll</HintPath>
- </Reference>
- <Reference Include="MathNet.Numerics">
- <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
- </Reference>
- <Reference Include="RosBridgeClient">
- <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
- </Reference>
- <Reference Include="System.Threading">
- <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
- </Reference>
- <Reference Include="UrdfImporter">
- <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
- </Reference>
- <Reference Include="websocket-sharp">
- <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Advertisements">
- <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/Editor/UnityEditor.Advertisements.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/UnityEngine.Analytics.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Analytics">
- <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/Editor/UnityEditor.Analytics.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/UnityEngine.Purchasing.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Purchasing">
- <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/Editor/UnityEditor.Purchasing.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.StandardEvents">
- <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\cameraFollow.cs" />
+    <Compile Include="Assets\CameraImagePublisher2.cs" />
+    <Compile Include="Assets\droneAssets\control\controlVars.cs" />
+    <Compile Include="Assets\droneAssets\control\droneController.cs" />
+    <Compile Include="Assets\droneAssets\control\functions.cs" />
+    <Compile Include="Assets\droneAssets\control\PID.cs" />
+    <Compile Include="Assets\droneAssets\drone.cs" />
+    <Compile Include="Assets\droneAssets\sensors\camera sensor\greyScaleDepthTest.cs" />
+    <Compile Include="Assets\droneAssets\sensors\camera sensor\sensorCamera.cs" />
+    <Compile Include="Assets\droneAssets\sensors\camera sensor\sensorCameraDepth.cs" />
+    <Compile Include="Assets\droneAssets\sensors\gps sensor\gps sensor.cs" />
+    <Compile Include="Assets\droneAssets\sensors\imu sensor\sensorIMU.cs" />
+    <Compile Include="Assets\droneAssets\sensors\laser sensor\laserRayCaster.cs" />
+    <Compile Include="Assets\droneAssets\sensors\laser sensor\laserSensor.cs" />
+    <Compile Include="Assets\droneAssets\sensors\laser sensor\pclInterface.cs" />
+    <Compile Include="Assets\droneAssets\sensors\laser sensor\pointcloudTest.cs" />
+    <Compile Include="Assets\droneAssets\sensors\laser sensor\rayCaster.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\AxisInput.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\CameraImageManager.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\CameraImagePublisher.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\JointLimitsManager.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\JointMotorManager.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\JointStateManager.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\JointStateSubscriber.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\JointTransformManager.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\OdometrySubscriber.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\OdometryTransformManager.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\RigidbodyUrdfDataManager.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\RosConnector.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\SpotLightManager.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\TransformExtensions.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\ConvexMeshPatcher.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\GravityPatcher.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\JointMotorPatcher.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\JointStatePatcher.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\KinematicPatcher.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\UrdfPatcher\OdometryPatcher.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\VelocitySubscriber.cs" />
+    <Compile Include="Assets\RosSharp\Scripts\VelocityTransformManager.cs" />
+    <None Include="Assets\droneAssets\sensors\camera sensor\depthshader.shader" />
+    <Reference Include="UnityEngine.UI">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Timeline">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Timeline">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TreeEditor">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIAutomation">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UIAutomation">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UIAutomation/Editor/UnityEditor.UIAutomation.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.GoogleAudioSpatializer">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GoogleAudioSpatializer">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.HoloLens">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HoloLens">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.SpatialTracking">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpatialTracking">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>D:/programs/unity/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>D:/programs/unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WSA.Extensions">
+      <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.WSA.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>D:/programs/unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RosBridgeClient">
+      <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/RosBridgeClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading">
+      <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="UrdfImporter">
+      <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/UrdfImporter.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>D:/files/unity workspace/UAVsimulation/Assets/RosSharp/Plugins/websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/Editor/UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Analytics">
+      <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/Editor/UnityEditor.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/Editor/UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StandardEvents">
+      <HintPath>C:/Users/luisr/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{9E08D824-F4AA-10A8-B58A-9B246FFCA7C2}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{9E08D824-F4AA-10A8-B58A-9B246FFCA7C2}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -210,5 +212,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>

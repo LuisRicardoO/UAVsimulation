@@ -100,6 +100,9 @@ namespace pclInterfaceName
 
         [DllImport("pclUnity", CharSet = CharSet.Unicode)]
         static extern IntPtr sendTestArray(IntPtr api);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern bool cloudIsEmpty(IntPtr api);
         //**************************************************************************************************************
         //**************************************************************************************************************
         //**************************************************************************************************************
@@ -433,6 +436,8 @@ namespace pclInterfaceName
             }
         }
 
-
+        public bool cloudHasPoints() {                                
+            return !cloudIsEmpty(cloud);
+        }
     }
 }
