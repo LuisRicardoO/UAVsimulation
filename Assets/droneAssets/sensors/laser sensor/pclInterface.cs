@@ -6,6 +6,7 @@ using UnityEngine;
 //using System;
 using System.Runtime.InteropServices;
 using RosSharp.RosBridgeClient;
+using System.Runtime.InteropServices;
 
 namespace pclInterfaceName
 {
@@ -103,6 +104,23 @@ namespace pclInterfaceName
 
         [DllImport("pclUnity", CharSet = CharSet.Unicode)]
         static extern bool cloudIsEmpty(IntPtr api);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern IntPtr getRosDataFast(IntPtr api);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern IntPtr getRosDataFastByParts(IntPtr api, int start, int end);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        [return: MarshalAs(UnmanagedType.SafeArray)]
+        static extern IntPtr sendTestArray2(IntPtr api);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        [return: MarshalAs(UnmanagedType.SafeArray)]
+        static extern IntPtr getRosDataPtr(IntPtr api);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern void sendTestArray3(IntPtr api,ref IntPtr ptr);
         //**************************************************************************************************************
         //**************************************************************************************************************
         //**************************************************************************************************************
@@ -169,6 +187,11 @@ namespace pclInterfaceName
         {
             toRosPointCloud(cloud);
             copyToSensorPointCloud2(pc, frame_id);
+        }
+
+        public void convertToRosMsgFromCloudSequential(SensorPointCloud2 pc, string frame_id)
+        {
+
         }
 
 
@@ -276,13 +299,23 @@ namespace pclInterfaceName
                 pc.fields[i] = field;
             }
 
+
+
+
             //copy data
+            /*
             byte[] data = new byte[0];
             getDataCloud2ToArray(ref data);
-            int length= getRosDataSize(cloud);
+            int length = getRosDataSize(cloud);
             Array.Resize<byte>(ref pc.data, length);
-            for (int i = 0; i < length; i++)            
-                pc.data[i] = data[i];              
+            for (int i = 0; i < length; i++)
+                pc.data[i] = data[i];
+            */
+
+            //copy data fast
+            Array.Resize<byte>(ref pc.data, getRosDataSize(cloud));
+            getDataCloud2ToSensorMsgData(ref pc);
+
         }
 
         /// <summary>
@@ -304,12 +337,12 @@ namespace pclInterfaceName
             sout += "offsets: " + pc.fields[0].offset + " " + pc.fields[1].offset + " " + pc.fields[2].offset + " ";
             sout += "datatypes: " + pc.fields[0].datatype + " " + pc.fields[1].datatype + " " + pc.fields[2].datatype + " ";
             sout += "counts: " + pc.fields[0].count + " " + pc.fields[1].count + " " + pc.fields[2].count + " ";
-            sout += "data size: " + getRosDataSize(cloud) + " ";            
+            sout += "data size: " + getRosDataSize(cloud) + " ";
             sout += "data: ";
             int length = getRosDataSize(cloud);
-            for (int i = 0; i < length; i++)            
-                sout += pc.data[i] + " ";            
-                        
+            for (int i = 0; i < length; i++)
+                sout += pc.data[i] + " ";
+
             return sout;
         }
 
@@ -409,7 +442,7 @@ namespace pclInterfaceName
             return sendTest(cloud);
         }
 
-        private void testByteArray(ref byte[] data)
+        public void testByteArray(ref byte[] data)
         {
             unsafe
             {
@@ -418,7 +451,93 @@ namespace pclInterfaceName
                 for (int i = 0; i < 20; i++)
                 {
                     data[i] = ptr[i];
-                } 
+                }
+            }
+        }
+
+
+
+        public void testByteArray2(ref byte[] data)
+        {
+            
+            unsafe
+            {
+                Array.Resize<byte>(ref data, 5);
+                byte* ptr = (byte*)sendTestArray2(cloud);
+                for (int i = 0; i < 5; i++)
+                {
+                    data[i] = ptr[i];
+                }
+            }
+            
+        }
+
+
+        public void testByteArray22(ref int[] data)
+        {
+            unsafe
+            {
+                Array.Resize<int>(ref data, 5);
+                IntPtr ptr = sendTestArray2(cloud);
+                int[] result = new int[5];                
+                Marshal.Copy(ptr, result, 0, 5);
+                for (int i = 0; i < 5; i++)
+                {
+                    data[i] = result[i];
+                }
+            }
+            /*
+            [DllImport("wrapper_demo_d.dll")]
+            public static extern IntPtr fnwrapper_intarr();
+
+            IntPtr ptr = fnwrapper_intarr();
+            int[] result = new int[3];
+            Marshal.Copy(ptr, result, 0, 3);    
+            */
+
+        }
+
+        public void testByteArray222(ref byte[] data)
+        {
+            unsafe
+            {
+                Array.Resize<byte>(ref data, getRosDataSize(cloud));
+                IntPtr ptr = getRosDataPtr(cloud);
+                byte[] result = new byte[getRosDataSize(cloud)];                
+                Marshal.Copy(ptr, result, 0, getRosDataSize(cloud));
+                for (int i = 0; i < getRosDataSize(cloud); i++)
+                {
+                    data[i] = result[i];
+                }
+            }
+            /*
+            [DllImport("wrapper_demo_d.dll")]
+            public static extern IntPtr fnwrapper_intarr();
+
+            IntPtr ptr = fnwrapper_intarr();
+            int[] result = new int[3];
+            Marshal.Copy(ptr, result, 0, 3);    
+            */
+
+        }
+
+        public void convert()
+        {
+            toRosPointCloud(cloud);            
+        }
+
+        public void testByteArray3(ref byte[] data)
+        {
+            unsafe
+            {
+                Array.Resize<byte>(ref data, 5);
+                IntPtr pointer=new IntPtr();                
+                sendTestArray3(cloud,ref pointer);
+                byte* ok = (byte*)pointer;
+                for (int i = 0; i < 5; i++)
+                {
+                    data[i] = ok[i];
+                }
             }
         }
 
@@ -436,7 +555,21 @@ namespace pclInterfaceName
             }
         }
 
-        public bool cloudHasPoints() {                                
+        private void getDataCloud2ToSensorMsgData(ref SensorPointCloud2 pc)
+        {
+            unsafe
+            {
+                int length = getRosDataSize(cloud);
+                byte* ptr = (byte*)getRosDataFast(cloud);
+                for (int i = 0; i < length; i++)
+                {
+                    pc.data[i] = ptr[i];
+                }
+            }
+        }
+
+        public bool cloudHasPoints()
+        {
             return !cloudIsEmpty(cloud);
         }
     }

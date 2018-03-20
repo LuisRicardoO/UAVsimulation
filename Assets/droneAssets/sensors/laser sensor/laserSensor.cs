@@ -45,53 +45,72 @@ public class laserSensor : MonoBehaviour
         droneBody = GameObject.Find("drone").GetComponent<Rigidbody>();
         publication_id = rosSocket.Advertize(publishTopic, "sensor_msgs/PointCloud2");
         laser = new rayCaster(maxLeftAngle, maxRightAngle, maxTopAngle, maxBottomAngle, verticalIncrement, horizontalIncrement, maxDistance, this, 1 << 8);
-        
+        pcl.createPclCloud(0, 0, true);
     }
     void Update()
     {
         laser2.defineParameters(maxLeftAngle, maxRightAngle, maxTopAngle, maxBottomAngle, verticalIncrement, horizontalIncrement, maxDistance, 1 << 8);
         if (run)
         {
+            ////este e o que funciona
+            //if (laser2.runCaster(ref pcl, this, drawRay))
+            //{
+            //    SensorPointCloud2 pc = new SensorPointCloud2();
+            //    pcl.convertToRosMsgFromCloud(pc, frame_id);
+            //    Debug.Log("CloudR->" + pcl.readCloudRosParameters(pc));
+            //    //rosSocket.Publish(publication_id, pc);
+            //    //pcl.createPclCloud(0, 0, true);
+            //}
+
+            /*
+            pcl.pushPointToCloud(new Vector3(1, 2, 3));
+            SensorPointCloud2 pc = new SensorPointCloud2();
+            pcl.convertToRosMsgFromCloud(pc, frame_id);
+            Debug.Log("CloudR->" + pcl.readCloudRosParameters(pc));
             pcl.createPclCloud(0, 0, true);
-
-            if (laser2.runCaster(ref pcl,this, drawRay))
+            */
+            unsafe
             {
-                SensorPointCloud2 pc = new SensorPointCloud2();
-                pcl.convertToRosMsgFromCloud(pc, frame_id);
-                rosSocket.Publish(publication_id, pc);
+                byte[] data = new byte[0];
+                pcl.testByteArray3(ref data);
+                Debug.Log("data: "+data[0]+" "+data[1]+ " " +data[3]);
             }
-            //    pcl.createPclCloud(0, 0, true);
-            //    //get points
-            //    //pushPointsToPcl()
-            //    //for (int i = 0; i < 20; i++)
-            //    //{
-            //    //    pcl.pushPointToCloud(new Vector3(1, i, 1));
-            //    //}
-            //    //pushPointstoPcl(maxLeftAngle, maxRightAngle, maxTopAngle, maxBottomAngle, maxDistance, horizontalIncrement, verticalIncrement);
-
-            //    castToPcl();
 
 
-            //    if (sequentialMode != 3)
-            //    {
-            //        if (pcl.cloudHasPoints())
-            //        {
-            //            SensorPointCloud2 pc = new SensorPointCloud2();
-            //            pcl.convertToRosMsgFromCloud(pc, frame_id);
-            //            //Debug.Log("pcl cloud->"+pcl.readCloudParameters());
-            //            //Debug.Log("Cloud2->" + pcl.readCloud2Parameters());
-            //            //Debug.Log("CloudR->" + pcl.readCloudRosParameters(pc));
-            //            rosSocket.Publish(publication_id, pc);
-            //        }
-            //    }
-            //    else if (laser.stackDone)
-            //    {
-            //        Debug.Log("publishing");
-            //        SensorPointCloud2 pc = new SensorPointCloud2();
-            //        pcl.convertToRosMsgFromCloud(pc, frame_id);
-            //        rosSocket.Publish(publication_id, pc);
-            //    }
         }
+
+        //    pcl.createPclCloud(0, 0, true);
+        //    //get points
+        //    //pushPointsToPcl()
+        //    //for (int i = 0; i < 20; i++)
+        //    //{
+        //    //    pcl.pushPointToCloud(new Vector3(1, i, 1));
+        //    //}
+        //    //pushPointstoPcl(maxLeftAngle, maxRightAngle, maxTopAngle, maxBottomAngle, maxDistance, horizontalIncrement, verticalIncrement);
+
+        //    castToPcl();
+
+
+        //    if (sequentialMode != 3)
+        //    {
+        //        if (pcl.cloudHasPoints())
+        //        {
+        //            SensorPointCloud2 pc = new SensorPointCloud2();
+        //            pcl.convertToRosMsgFromCloud(pc, frame_id);
+        //            //Debug.Log("pcl cloud->"+pcl.readCloudParameters());
+        //            //Debug.Log("Cloud2->" + pcl.readCloud2Parameters());
+        //            //Debug.Log("CloudR->" + pcl.readCloudRosParameters(pc));
+        //            rosSocket.Publish(publication_id, pc);
+        //        }
+        //    }
+        //    else if (laser.stackDone)
+        //    {
+        //        Debug.Log("publishing");
+        //        SensorPointCloud2 pc = new SensorPointCloud2();
+        //        pcl.convertToRosMsgFromCloud(pc, frame_id);
+        //        rosSocket.Publish(publication_id, pc);
+        //    }
+
     }
 
     private void castToPcl()
@@ -100,7 +119,8 @@ public class laserSensor : MonoBehaviour
         {
             laser.runRayCaster(pcl);
         }
-        else {
+        else
+        {
             laser.runRayCaster(sequentialMode);
             if (laser.stackDone)
             {

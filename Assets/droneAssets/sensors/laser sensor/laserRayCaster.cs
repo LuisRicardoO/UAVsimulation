@@ -31,8 +31,6 @@ namespace laserRayCasterName
         //for operating sequential modes
         private float currentAngle;
 
-
-        private bool okok ;
         public laserRayCaster()
         {
             stackDone = true;
@@ -63,18 +61,38 @@ namespace laserRayCasterName
                     getPointFromRay(currentHoriAngle, currentAngle, maxDist, ref pcl, laser, drawRay);
                     currentHoriAngle += horiInc;
                 }
-                currentAngle -= horiInc;
-
+                currentAngle -= horiInc;           
             }
             else
             {
-                okok=pcl.cloudHasPoints();
-                Debug.Log("done " +okok);
+                //Debug.Log("done " + pcl.cloudHasPoints());
                 stackDone = true;
                 if (pcl.cloudHasPoints())
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+
+        public bool runCasterSimultaneos(ref pclInterface pcl, laserSensor laser, bool drawRay)
+        {            
+            float currentVertAngle = topA;
+            //vertical laser movement
+            while (currentVertAngle >= bottomA)
+            {
+                float currentHoriAngle = leftA;
+                //horizontal lase movement
+                while (currentHoriAngle < rightA)
+                {
+                    getPointFromRay(currentHoriAngle, currentVertAngle, maxDist,ref pcl, laser,drawRay);
+                    currentHoriAngle += horiInc;
+                }
+                currentVertAngle -= vertInc;
+            }
+            if(pcl.cloudHasPoints())
+            {
+                return true;
             }
             return false;
         }
@@ -87,8 +105,8 @@ namespace laserRayCasterName
             direction.Normalize();
             RaycastHit hit;
             if (Physics.Raycast(laserObject.transform.position, direction, out hit, maxDist, rayLayer))
-            {
-                pcl.pushPointToCloud(hit.point);
+            {                
+                pcl.pushPointToCloud(new Vector3(hit.point.x, hit.point.z, hit.point.y));
             }
             if (drawRay)
                 Debug.DrawRay(laserObject.transform.position, direction * maxDist, new Color(254, 254, 254, 0.5f));
