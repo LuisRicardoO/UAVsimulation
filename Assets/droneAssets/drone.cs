@@ -39,6 +39,7 @@ public class drone : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
         //ros connection
         //rosSocket = new RosSocket("ws://192.168.1.10:9090");
         rosSocket = transform.GetComponent<RosConnector>().RosSocket;

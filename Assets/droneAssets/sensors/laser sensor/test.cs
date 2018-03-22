@@ -15,13 +15,14 @@ public class test : MonoBehaviour
     {
         
         pcl.createPclCloud(0, 0, true);
-        pcl.pushPointToCloud(new Vector3(1, 2, 3));
+        pcl.pushPointToCloud(new Vector3(1, 2, 3));        
+        pcl.convertToCloud2();
         SensorPointCloud2 pc = new SensorPointCloud2();
-        pcl.convert();
-
-        byte[] data= new byte[0];
-        pcl.testByteArray222(ref data);
-        Debug.Log("data: "+data[0]+" "+data[1] + " " + data[2] + " " + data[3] + " " + data[4]);                                    
+        pcl.convertToRosCloud(ref pc,"ok");
+        Debug.Log("data: " + pc.data[0] + " " + pc.data[1] + " " + pc.data[2] + " " + pc.data[3] + " " + pc.data[4]);        
+        //byte[] data= new byte[0];
+        //pcl.testByteArray222(ref data);
+        //Debug.Log("data: "+data[0]+" "+data[1] + " " + data[2] + " " + data[3] + " " + data[4]);                                    
     }
 
 

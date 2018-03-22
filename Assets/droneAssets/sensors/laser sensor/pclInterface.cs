@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 //using System;
 using System.Runtime.InteropServices;
 using RosSharp.RosBridgeClient;
-using System.Runtime.InteropServices;
 
 namespace pclInterfaceName
 {
@@ -120,7 +117,13 @@ namespace pclInterfaceName
         static extern IntPtr getRosDataPtr(IntPtr api);
 
         [DllImport("pclUnity", CharSet = CharSet.Unicode)]
-        static extern void sendTestArray3(IntPtr api,ref IntPtr ptr);
+        [return: MarshalAs(UnmanagedType.SafeArray)]
+        static extern IntPtr getRosDataPtrAt(IntPtr api, int at);
+
+        [DllImport("pclUnity", CharSet = CharSet.Unicode)]
+        static extern void sendTestArray3(IntPtr api, ref IntPtr ptr);
+
+        
         //**************************************************************************************************************
         //**************************************************************************************************************
         //**************************************************************************************************************
@@ -153,17 +156,188 @@ namespace pclInterfaceName
             setCloudDense(cloud, is_dense);
         }
 
-
+        //MAIN METHODS**************************************************************************************************************
         /// <summary>
         /// pushs a point to pcl::pointCloud
+        /// axis are converted to the ones used in Ros
         /// </summary>
         /// <param name="pointXYZ"></param>
         public void pushPointToCloud(Vector3 pointXYZ)
         {
-            pushPoint(cloud, pointXYZ.x, pointXYZ.y, pointXYZ.z);
+            pushPoint(cloud, pointXYZ.x, pointXYZ.z, pointXYZ.y);
+        }
+        /// <summary>
+        /// Converts pcl::pointcloud to pcl::pclPointCloud2
+        /// </summary>
+        /// <param name="pc"></param>
+        /// <param name="frame_id"></param>        
+        public void convertToCloud2()
+        {
+            toRosPointCloud(cloud);
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pc"></param>
+        /// <param name="frame_id"></param>
+        public void convertToRosCloud(ref SensorPointCloud2 pc, string frame_id)
+        {
+            //header should be already set            
+            pc.header.frame_id = frame_id;
+
+            pc.height = getRosHeight(cloud);
+            pc.width = getRosWidth(cloud);
+            pc.is_bigendian = getRosBigendian(cloud);
+            pc.point_step = getRosPointStep(cloud);
+            pc.row_step = getRosRowStep(cloud);
+            pc.is_dense = getRosDense(cloud);
+
+            int size = getRosFieldSize(cloud);
+            List<string> names = getFieldsStrings();
+            List<int> offsets = getFieldsIntegers(1);
+            List<int> dataTypes = getFieldsIntegers(2);
+            List<int> counts = getFieldsIntegers(3);
+            //Debug.Log("***************************************");
+            //Debug.Log("antes"+pc.fields.Length);
+            Array.Resize<SensorPointField>(ref pc.fields, 3);
+            //Debug.LogWarning("depois "+pc.fields.Length);
+            for (int i = 0; i < size; i++)
+            {
+                SensorPointField field = new SensorPointField();
+                field.datatype = dataTypes[i];
+                field.name = names[i];
+                field.offset = offsets[i];
+                field.count = counts[i];
+                pc.fields[i] = field;
+            }
+            //copyData
+            cloud2RosCloud(ref pc);
+
         }
 
 
+        //AUX METHODS****************************************************************************************************
+        /// <summary>
+        /// Gets a string name list of every field in pcl::pclPointCloud
+        /// </summary>
+        /// <returns></returns>
+        private List<string> getFieldsStrings()
+        {
+            unsafe
+            {
+                List<string> list = new List<string>();
+                char** names = (char**)getRosFieldName(cloud);
+                int size = getRosFieldSize(cloud);
+                for (int i = 0; i < size; i++)
+                {
+                    list.Add(new string(names[i], 0, 1));
+                }
+                return list;
+            }
+        }
+        /// <summary>
+        /// Gets a integer list of every field in pcl::pclPointCloud
+        /// </summary>
+        /// <param name="parameter">1= offset
+        /// 2=datatype
+        /// 3=count</param>
+        /// <returns></returns>
+        private List<int> getFieldsIntegers(int parameter)
+        {
+
+            unsafe
+            {
+                List<int> list = new List<int>();
+                int* ints = null;
+                switch (parameter)
+                {
+                    case 1:
+                        ints = (int*)getRosFieldOffset(cloud);
+                        break;
+                    case 2:
+                        ints = (int*)getRosFieldDataType(cloud);
+                        break;
+                    case 3:
+                        ints = (int*)getRosFieldCount(cloud);
+                        break;
+                    default:
+                        break;
+                }
+
+                int size = getRosFieldSize(cloud);
+                for (int i = 0; i < size; i++)
+                {
+                    list.Add(ints[i]);
+                }
+                return list;
+            }
+        }
+        private byte readDataFromCloud2At(int at)
+        {
+            return getRosDataAt(cloud, at);
+        }
+        private void oldGetData(ref byte[] data)
+        {
+            unsafe
+            {
+                int length = getRosDataSize(cloud);
+                Array.Resize<byte>(ref data, length);
+                byte* ptr = (byte*)getRosData(cloud);
+                for (int i = 0; i < length; i++)
+                {
+                    data[i] = ptr[i];
+                }
+            }
+        }
+        private void oldCloud2RosCloud(ref SensorPointCloud2 pc)
+        {
+            unsafe
+            {
+                int length = getRosDataSize(cloud);
+                byte* ptr = (byte*)getRosDataFast(cloud);
+                for (int i = 0; i < length; i++)
+                {
+                    pc.data[i] = ptr[i];
+                }
+            }
+        }
+        /// <summary>
+        /// copy from cloud2 data to ros cloud data
+        /// </summary>
+        /// <param name="rosCloud"></param>
+        private void cloud2RosCloud(ref SensorPointCloud2 rosCloud)
+        {
+            unsafe
+            {
+                //Array.Resize<byte>(ref rosCloud.data, getRosDataSize(cloud));
+                rosCloud.data = new byte[getRosDataSize(cloud)];
+                IntPtr ptr = getRosDataPtr(cloud);
+                Marshal.Copy(ptr, rosCloud.data, 0, getRosDataSize(cloud));
+            }
+        }
+
+        /// <summary>
+        /// copy entire point cloud to part of the ros cloud msg
+        /// </summary>
+        /// <param name="rosCloud"></param>
+        /// <param name="start"></param>
+        /// <param name="size"></param>
+        private void cloud2PartRosCloud(ref SensorPointCloud2 rosCloud,int start, int size)
+        {
+            unsafe
+            {                             
+                IntPtr ptr = getRosDataPtr(cloud);
+                Marshal.Copy(ptr, rosCloud.data,start, size);
+            }
+        }
+
+
+        //DEBUG METHDOS**************************************************************************************************    
+        public bool cloudHasPoints()
+        {
+            return !cloudIsEmpty(cloud);
+        }
         /// <summary>
         /// Reads parameters of pcl::pointCloud
         /// </summary>
@@ -177,24 +351,6 @@ namespace pclInterfaceName
             sout += "first Point" + getPointAtX(cloud, 0) + " " + getPointAtY(cloud, 0) + " " + getPointAtZ(cloud, 0);
             return sout;
         }
-
-        /// <summary>
-        /// Converts pcl::pointcloud to pcl::pclPointCloud2
-        /// </summary>
-        /// <param name="pc"></param>
-        /// <param name="frame_id"></param>
-        public void convertToRosMsgFromCloud(SensorPointCloud2 pc, string frame_id)
-        {
-            toRosPointCloud(cloud);
-            copyToSensorPointCloud2(pc, frame_id);
-        }
-
-        public void convertToRosMsgFromCloudSequential(SensorPointCloud2 pc, string frame_id)
-        {
-
-        }
-
-
         /// <summary>
         /// Reads parameters of pcl::pclPointCloud2
         /// </summary>
@@ -233,7 +389,7 @@ namespace pclInterfaceName
             sout += "data size: " + getRosDataSize(cloud) + " ";
             sout += "data: ";
             byte[] data = new byte[0];
-            getDataCloud2ToArray(ref data);
+            oldGetData(ref data);
             int length = getRosDataSize(cloud);
             for (int i = 0; i < length; i++)
             {
@@ -261,63 +417,6 @@ namespace pclInterfaceName
             //}            
             return sout;
         }
-
-        /// <summary>
-        /// copy from pcl::pclPointCloud2 to sensorPointCloud2 (i.e. sensor_msgs/PointCloud2)
-        /// </summary>
-        /// <param name="pc"></param>
-        /// <param name="frame_id"></param>
-        private void copyToSensorPointCloud2(SensorPointCloud2 pc, string frame_id)
-        {
-
-            //header should be already set            
-            pc.header.frame_id = frame_id;
-
-            pc.height = getRosHeight(cloud);
-            pc.width = getRosWidth(cloud);
-            pc.is_bigendian = getRosBigendian(cloud);
-            pc.point_step = getRosPointStep(cloud);
-            pc.row_step = getRosRowStep(cloud);
-            pc.is_dense = getRosDense(cloud);
-
-            int size = getRosFieldSize(cloud);
-            List<string> names = getFieldsStrings();
-            List<int> offsets = getFieldsIntegers(1);
-            List<int> dataTypes = getFieldsIntegers(2);
-            List<int> counts = getFieldsIntegers(3);
-            //Debug.Log("***************************************");
-            //Debug.Log("antes"+pc.fields.Length);
-            Array.Resize<SensorPointField>(ref pc.fields, 3);
-            //Debug.LogWarning("depois "+pc.fields.Length);
-            for (int i = 0; i < size; i++)
-            {
-                SensorPointField field = new SensorPointField();
-                field.datatype = dataTypes[i];
-                field.name = names[i];
-                field.offset = offsets[i];
-                field.count = counts[i];
-                pc.fields[i] = field;
-            }
-
-
-
-
-            //copy data
-            /*
-            byte[] data = new byte[0];
-            getDataCloud2ToArray(ref data);
-            int length = getRosDataSize(cloud);
-            Array.Resize<byte>(ref pc.data, length);
-            for (int i = 0; i < length; i++)
-                pc.data[i] = data[i];
-            */
-
-            //copy data fast
-            Array.Resize<byte>(ref pc.data, getRosDataSize(cloud));
-            getDataCloud2ToSensorMsgData(ref pc);
-
-        }
-
         /// <summary>
         /// Reads paramters of sensorPointCloud2
         /// </summary>
@@ -345,70 +444,11 @@ namespace pclInterfaceName
 
             return sout;
         }
-
-
-        /// <summary>
-        /// Gets a string name list of every field in pcl::pclPointCloud
-        /// </summary>
-        /// <returns></returns>
-        private List<string> getFieldsStrings()
-        {
-            unsafe
-            {
-                List<string> list = new List<string>();
-                char** names = (char**)getRosFieldName(cloud);
-                int size = getRosFieldSize(cloud);
-                for (int i = 0; i < size; i++)
-                {
-                    list.Add(new string(names[i], 0, 1));
-                }
-                return list;
-            }
-        }
-
-        /// <summary>
-        /// Gets a integer list of every field in pcl::pclPointCloud
-        /// </summary>
-        /// <param name="parameter">1= offset
-        /// 2=datatype
-        /// 3=count</param>
-        /// <returns></returns>
-        private List<int> getFieldsIntegers(int parameter)
-        {
-
-            unsafe
-            {
-                List<int> list = new List<int>();
-                int* ints = null;
-                switch (parameter)
-                {
-                    case 1:
-                        ints = (int*)getRosFieldOffset(cloud);
-                        break;
-                    case 2:
-                        ints = (int*)getRosFieldDataType(cloud);
-                        break;
-                    case 3:
-                        ints = (int*)getRosFieldCount(cloud);
-                        break;
-                    default:
-                        break;
-                }
-
-                int size = getRosFieldSize(cloud);
-                for (int i = 0; i < size; i++)
-                {
-                    list.Add(ints[i]);
-                }
-                return list;
-            }
-        }
-
         public string compareDataCloud2andCloudRos(SensorPointCloud2 pc)
         {
             string sout = "";
             byte[] data = new byte[0];
-            getDataCloud2ToArray(ref data);
+            oldGetData(ref data);
             int length = getRosDataSize(cloud);
             for (int i = 0; i < length; i++)
             {
@@ -432,16 +472,12 @@ namespace pclInterfaceName
             }
             */
         }
-        public byte readDataFromCloud2At(int at)
-        {
-            return getRosDataAt(cloud, at);
-        }
 
+        //TEST METHODS DO NOT USE THEM************************************************************************************
         public byte testByte()
         {
             return sendTest(cloud);
         }
-
         public void testByteArray(ref byte[] data)
         {
             unsafe
@@ -454,12 +490,9 @@ namespace pclInterfaceName
                 }
             }
         }
-
-
-
         public void testByteArray2(ref byte[] data)
         {
-            
+
             unsafe
             {
                 Array.Resize<byte>(ref data, 5);
@@ -469,17 +502,15 @@ namespace pclInterfaceName
                     data[i] = ptr[i];
                 }
             }
-            
+
         }
-
-
         public void testByteArray22(ref int[] data)
         {
             unsafe
             {
                 Array.Resize<int>(ref data, 5);
                 IntPtr ptr = sendTestArray2(cloud);
-                int[] result = new int[5];                
+                int[] result = new int[5];
                 Marshal.Copy(ptr, result, 0, 5);
                 for (int i = 0; i < 5; i++)
                 {
@@ -496,14 +527,13 @@ namespace pclInterfaceName
             */
 
         }
-
         public void testByteArray222(ref byte[] data)
         {
             unsafe
             {
                 Array.Resize<byte>(ref data, getRosDataSize(cloud));
                 IntPtr ptr = getRosDataPtr(cloud);
-                byte[] result = new byte[getRosDataSize(cloud)];                
+                byte[] result = new byte[getRosDataSize(cloud)];
                 Marshal.Copy(ptr, result, 0, getRosDataSize(cloud));
                 for (int i = 0; i < getRosDataSize(cloud); i++)
                 {
@@ -520,57 +550,23 @@ namespace pclInterfaceName
             */
 
         }
-
         public void convert()
         {
-            toRosPointCloud(cloud);            
+            toRosPointCloud(cloud);
         }
-
         public void testByteArray3(ref byte[] data)
         {
             unsafe
             {
                 Array.Resize<byte>(ref data, 5);
-                IntPtr pointer=new IntPtr();                
-                sendTestArray3(cloud,ref pointer);
+                IntPtr pointer = new IntPtr();
+                sendTestArray3(cloud, ref pointer);
                 byte* ok = (byte*)pointer;
                 for (int i = 0; i < 5; i++)
                 {
                     data[i] = ok[i];
                 }
             }
-        }
-
-        private void getDataCloud2ToArray(ref byte[] data)
-        {
-            unsafe
-            {
-                int length = getRosDataSize(cloud);
-                Array.Resize<byte>(ref data, length);
-                byte* ptr = (byte*)getRosData(cloud);
-                for (int i = 0; i < length; i++)
-                {
-                    data[i] = ptr[i];
-                }
-            }
-        }
-
-        private void getDataCloud2ToSensorMsgData(ref SensorPointCloud2 pc)
-        {
-            unsafe
-            {
-                int length = getRosDataSize(cloud);
-                byte* ptr = (byte*)getRosDataFast(cloud);
-                for (int i = 0; i < length; i++)
-                {
-                    pc.data[i] = ptr[i];
-                }
-            }
-        }
-
-        public bool cloudHasPoints()
-        {
-            return !cloudIsEmpty(cloud);
         }
     }
 }
